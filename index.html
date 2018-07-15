@@ -35,8 +35,13 @@
     function literalize(str) {
       var results = Papa.parse(str);
       // TODO Better error handling.
-      var data = results.data;      
-      return "[" + _.flatten(data).join(', ') + "]";
+      var data = results.data;
+      
+      var lines = []
+      for (var row = 0; row < data.length; row++) {
+        lines.push("[" + data[row].join(', ') + "]");
+      }
+      return "[" + lines.join(", ") + "]";
     }
 
     $(document).ready(function($) {
