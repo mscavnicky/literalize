@@ -7,6 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="./boostrap-switch.css" type="text/css">
+
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
@@ -32,11 +34,19 @@
   </style>
 
   <script>
-    function literalize(str) {
+    function transposeArray(array) {
+      return _.zip.apply(_, array);
+    }
+
+    function literalize(str, transpose) {
       var results = Papa.parse(str);
       // TODO Better error handling.
       var data = results.data;
       
+      if (transpose) {
+        data = transposeArray(data);
+      }
+
       var lines = []
       for (var row = 0; row < data.length; row++) {
         lines.push("[" + data[row].join(', ') + "]");
@@ -47,9 +57,9 @@
     $(document).ready(function($) {
       $("#literalize").click(function(event) {
         var content = $("#input-editor").val();
+        var transpose = $("#transpose").prop("checked");
         // TODO For error handling return errors and display a flash message as well.
-        var literalized = literalize(content);
-        console.log(literalized);
+        var literalized = literalize(content, transpose);
         if (!_.isUndefined(literalized)) {
           $("#output-editor").val(literalized);
         }
@@ -67,6 +77,12 @@
           </div>
         </div>
         <div class="col-sm-2">
+          <div class="form-group">
+            <span class="switch">
+              <input type="checkbox" class="switch" id="transpose">
+              <label for="transpose">Transpose</label>
+            </span>
+          </div>
           <div class="form-group">
             <button id="literalize" class="btn btn-primary btn-block form-control">Literalize</button>
           </div>
