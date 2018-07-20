@@ -46,7 +46,11 @@
         }
         return "[" + strings.join(', ') + "]";
       } else {
-        return term;
+        if (isNaN(term)) {
+          return "'" + term + "'";
+        } else {
+          return term;
+        }
       }
     }
 
