@@ -21,18 +21,21 @@
 
   <script>
     $(document).ready(function($) {
-      $("#literalize").click(function(event) {
-        var content = $("#input-editor").val();
-        var options = {
-          transpose: $("#transpose").prop("checked"),
-          forceQuotes: $("#forceQuotes").prop("checked")
-        }
-        // TODO For error handling return errors and display a flash message as well.
-        var literalized = literalize(content, options);
-        if (!_.isUndefined(literalized)) {
-          $("#output-editor").val(literalized);
-        }
-      });
+      clickableElements = ["#literalize", "#transpose", "#forceQuotes"];
+      for (var i in clickableElements) {
+        $(clickableElements[i]).click(function(event) {
+          var content = $("#input-editor").val();
+          var options = {
+            transpose: $("#transpose").prop("checked"),
+            forceQuotes: $("#forceQuotes").prop("checked")
+          }
+          // TODO For error handling return errors and display a flash message as well.
+          var literalized = literalize(content, options);
+          if (!_.isUndefined(literalized)) {
+            $("#output-editor").val(literalized);
+          }
+        });
+      };
     });
   </script>
 </head>
