@@ -1,0 +1,14 @@
+html, body, main {
+  height: 100%;
+}
+
+main {
+  margin: 20px;
+}
+
+.editor {
+  height: 95%;
+  width: 100%;
+  padding: 10px;
+  resize: none;
+}
