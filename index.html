@@ -23,9 +23,12 @@
     $(document).ready(function($) {
       $("#literalize").click(function(event) {
         var content = $("#input-editor").val();
-        var transpose = $("#transpose").prop("checked");
+        var options = {
+          transpose: $("#transpose").prop("checked"),
+          forceQuotes: $("#forceQuotes").prop("checked")
+        }
         // TODO For error handling return errors and display a flash message as well.
-        var literalized = literalize(content, transpose);
+        var literalized = literalize(content, options);
         if (!_.isUndefined(literalized)) {
           $("#output-editor").val(literalized);
         }
@@ -43,6 +46,12 @@
           </div>
         </div>
         <div class="col-sm-2">
+          <div class="form-group">
+              <span class="switch">
+                <input type="checkbox" class="switch" id="forceQuotes">
+                <label for="forceQuotes">Force quotes</label>
+              </span>
+          </div>
           <div class="form-group">
             <span class="switch">
               <input type="checkbox" class="switch" id="transpose">
