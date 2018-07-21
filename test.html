@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.12.0.css">
+	<script src="http://code.jquery.com/qunit/qunit-1.12.0.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js" integrity="sha256-G7A4JrJjJlFqP0yamznwPjAApIKPkadeHfyIwiaa9e0=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.5.0/papaparse.min.js" integrity="sha256-stOh2I/t/3J+QGIFvUyHxFAYWcNIQdCQdXpyDKDuHLc=" crossorigin="anonymous"></script>
+
+	<script src="js/literalize.js"></script>
+	
+	<script>
+		test("Literalize empty string", function (assert) {
+			assert.equal(literalize(''), '[]');
+		});
+
+		test("Literalize a number", function (assert) {
+			assert.equal(literalize('42'), '[42]');
+		});
+
+		test("Literalize a string", function (assert) {
+			assert.equal(literalize('foo'), "['foo']");
+		});
+
+		test("Literalize a string with intro newline", function (assert) {
+			assert.equal(literalize("\nfoo"), "['foo']");
+		});
+
+		test("Literalize a string with trailing newline", function (assert) {
+			assert.equal(literalize("foo\n"), "['foo']");
+		});
+
+		test("Literalize a row of numeric values", function (assert) {
+			assert.equal(literalize('1,2,3'), '[1, 2, 3]');
+		});
+
+		test("Literalize a row of string values", function (assert) {
+			assert.equal(literalize('a,b,c'), "['a', 'b', 'c']");
+		});
+
+		test("Literalize a column of string values", function (assert) {
+			assert.equal(literalize("a\nb\nc"), "[['a'], ['b'], ['c']]");
+		});
+	</script>
+</head>
+<body>
+  <div id="qunit"></div>
+  <div id="qunit-fixture"></div>
+</body>
+</html>
