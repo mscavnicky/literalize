@@ -19,7 +19,7 @@ function toLiteral(term) {
 }
 
 function literalize(str, transpose) {
-  var results = Papa.parse(str);
+  var results = Papa.parse($.trim(str));
   // TODO Better error handling.
   var data = results.data;
   
