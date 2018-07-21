@@ -1,4 +1,4 @@
-function transposeArray(array) {
+function transposeMatrix(array) {
   return _.zip.apply(_, array);
 }
 
@@ -30,7 +30,7 @@ function literalize(str, options) {
   var data = results.data;
   
   if (options.transpose === true) {
-    data = transposeArray(data);
+    data = transposeMatrix(data);
   }
   // Unnest the 1D-arrays which were nested since parsing the CSV.
   if (_.isArray(data) && data.length == 1) {

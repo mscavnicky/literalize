@@ -52,6 +52,14 @@
 		test("Literalize a column of string values", function (assert) {
 			assert.equal(literalize("a\nb\nc"), "[['a'], ['b'], ['c']]");
 		});
+
+		test("Literalize a column of string values with transposition", function (assert) {
+			assert.equal(literalize("a\nb\nc", {transpose: true}), "['a', 'b', 'c']");
+		});
+
+		test("Literalize a matrix of numeric values", function (assert) {
+			assert.equal(literalize("1 2\n3 4\n"), "[[1, 2], [3, 4]]");
+		});
 	</script>
 </head>
 <body>
