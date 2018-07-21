@@ -37,6 +37,10 @@
 			assert.equal(literalize('1,2,3'), '[1, 2, 3]');
 		});
 
+		test("Literalize a row of numeric values separated by space", function (assert) {
+			assert.equal(literalize('1 2 3'), '[1, 2, 3]');
+		});
+
 		test("Literalize a row of string values", function (assert) {
 			assert.equal(literalize('a,b,c'), "['a', 'b', 'c']");
 		});

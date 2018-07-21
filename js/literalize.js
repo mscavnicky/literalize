@@ -19,6 +19,11 @@ function toLiteral(term) {
 }
 
 function literalize(str, transpose) {
+  // XXX This is pretty bad hack. Papaparse does not support spaces by default.
+  // We is also not able to override the defaul selection of guess delmiters.
+  // There we remove the ASCII character 31 from the list and replace it with space.
+  Papa.RECORD_SEP = ' ';
+
   var results = Papa.parse($.trim(str));
   // TODO Better error handling.
   var data = results.data;
