@@ -21,13 +21,13 @@
 
   <script>
     $(document).ready(function($) {
-      clickableElements = ["#literalize", "#transpose", "#forceQuotes"];
+      clickableElements = ["#literalize", "#transpose", "#quoteNumbers"];
       for (var i in clickableElements) {
         $(clickableElements[i]).click(function(event) {
           var content = $("#input-editor").val();
           var options = {
             transpose: $("#transpose").prop("checked"),
-            forceQuotes: $("#forceQuotes").prop("checked")
+            forceQuotes: $("#quoteNumbers").prop("checked")
           }
           // TODO For error handling return errors and display a flash message as well.
           var literalized = literalize(content, options);
@@ -61,8 +61,8 @@
         <div class="col-md-2">
           <div class="form-group">
               <span class="switch">
-                <input type="checkbox" class="switch" id="forceQuotes">
-                <label for="forceQuotes">Force quotes</label>
+                <input type="checkbox" class="switch" id="quoteNumbers">
+                <label for="quoteNumbers">Quote numbers</label>
               </span>
           </div>
           <div class="form-group">

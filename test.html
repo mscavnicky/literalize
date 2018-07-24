@@ -42,7 +42,7 @@
 		});
 
 		test("Literalize a row of numeric values with force quotes", function (assert) {
-			assert.equal(literalize('1,2,3', {forceQuotes: true}), "['1', '2', '3']");
+			assert.equal(literalize('1,2,3', {quoteNumbers: true}), "['1', '2', '3']");
 		});
 
 		test("Literalize a row of string values", function (assert) {

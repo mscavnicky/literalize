@@ -10,7 +10,7 @@ function toLiteral(term, options) {
     }
     return "[" + strings.join(', ') + "]";
   } else {
-    if (options.forceQuotes === true || isNaN(term)) {
+    if (options.quoteNumbers === true || isNaN(term)) {
       return "'" + term + "'";
     } else {
       return term;
