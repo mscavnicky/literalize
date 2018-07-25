@@ -18,6 +18,10 @@ function toLiteral(term, options) {
   }
 }
 
+function occurences(str, part) {
+  return str.split(part).length - 1;
+}
+
 function literalize(str, options) {
   options = options || {};
   // XXX This is pretty bad hack. Papaparse does not support spaces by default.
@@ -25,7 +29,13 @@ function literalize(str, options) {
   // There we remove the ASCII character 31 from the list and replace it with space.
   Papa.RECORD_SEP = ' ';
 
-  var results = Papa.parse($.trim(str));
+  // Simple heuristics to override quote character, as it does not get auto-detected.
+  var papaConfig = {}
+  if (occurences(str, "'") > occurences(str, '"')) {
+    papaConfig.quoteChar = "'";
+  }
+
+  var results = Papa.parse($.trim(str), papaConfig);
   // TODO Better error handling.
   var data = results.data;
   

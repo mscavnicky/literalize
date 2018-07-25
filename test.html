@@ -49,6 +49,14 @@
 			assert.equal(literalize('a,b,c'), "['a', 'b', 'c']");
 		});
 
+		test("Literalize a row of single-quoted string values", function (assert) {
+			assert.equal(literalize("'a','b','c'"), "['a', 'b', 'c']");
+		});
+
+		test("Literalize a row of double-quoted string values", function (assert) {
+			assert.equal(literalize('"a","b","c"'), "['a', 'b', 'c']");
+		});
+
 		test("Literalize a column of string values", function (assert) {
 			assert.equal(literalize("a\nb\nc"), "[['a'], ['b'], ['c']]");
 		});
